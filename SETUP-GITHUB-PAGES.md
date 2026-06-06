@@ -9,8 +9,8 @@
 ## What you'll end up with
 
 Two public URLs under the GR3NB organization:
-- `https://gr3nb.github.io/rust-and-rainbow/privacy.html`
-- `https://gr3nb.github.io/rust-and-rainbow/terms.html`
+- `https://gr3nb.github.io/rustandrainbow/privacy.html`
+- `https://gr3nb.github.io/rustandrainbow/terms.html`
 
 Both render the markdown files I already created in `Rust & Rainbow/legal/`.
 
@@ -18,12 +18,12 @@ Both render the markdown files I already created in `Rust & Rainbow/legal/`.
 
 ## Step 1 — GitHub org setup (DONE ✅)
 
-The `GR3NB` GitHub organization has been created and the `rust-and-rainbow` repo has been transferred to it at:
-`https://github.com/GR3NB/rust-and-rainbow`
+The `GR3NB` GitHub organization has been created and the `rustandrainbow` repo has been transferred to it at:
+`https://github.com/GR3NB/rustandrainbow`
 
 ## Step 2 — Upload the legal docs — 3 min
 
-1. In the repo at github.com/GR3NB/rust-and-rainbow, click **Add file** → **Upload files**
+1. In the repo at github.com/GR3NB/rustandrainbow, click **Add file** → **Upload files**
 2. Drag in the HTML files from:
    - `/Users/ryannortham/Claude/Projects/side business/Rust & Rainbow/legal/privacy.html`
    - `/Users/ryannortham/Claude/Projects/side business/Rust & Rainbow/legal/terms.html`
@@ -42,8 +42,8 @@ The `GR3NB` GitHub organization has been created and the `rust-and-rainbow` repo
 ## Step 5 — Verify the URLs work
 
 Open both in a fresh browser window:
-- `https://gr3nb.github.io/rust-and-rainbow/privacy.html`
-- `https://gr3nb.github.io/rust-and-rainbow/terms.html`
+- `https://gr3nb.github.io/rustandrainbow/privacy.html`
+- `https://gr3nb.github.io/rustandrainbow/terms.html`
 
 You should see the styled policy text. These are the canonical URLs to use everywhere.
 

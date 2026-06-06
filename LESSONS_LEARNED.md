@@ -1,6 +1,6 @@
 # Rust & Rainbow — Lessons Learned
 
-Last updated: 2026-05-21
+Last updated: 2026-06-06
 
 These are hard-won lessons from building the social posting automation stack. Each one
 cost real time. Read this before touching social API integrations again.
@@ -16,20 +16,29 @@ Rejected twice (2026-05-10, 2026-05-14). Second rejection confirmed it is a hard
 > "TikTok for Developers currently does not support personal or internal company use.
 > Not acceptable: Display posts from the TikTok account(s) you or your team manage."
 
-**Why this matters:** No amount of reframing the app name or description fixes this.
-The underlying use case (developer posting to their own account) is categorically excluded.
-TikTok's API is designed for multi-tenant apps where external users connect their accounts.
+**Why this matters:** The original rejections (2026-05-10, 2026-05-14) were framed as
+"posting to your own account" being disallowed. However, a third attempt (2026-06-06)
+was made with corrected framing: the app description was rewritten to clearly state
+Content Posting API usage for publishing original product content — not displaying
+TikTok content on a website. App is currently **pending review** as of 2026-06-06.
 
-**The fix:** Use a third-party scheduling service that is already an approved TikTok developer.
-The user connects their TikTok account to that service; the service posts on their behalf.
-We use Zernio for this.
+**Important distinction clarified on third attempt:**
+- ❌ Rejected use case: "Display posts from TikTok account on your website" (Display API)
+- ✅ Allowed use case: "Publish original content TO TikTok via Content Posting API"
+The original rejections may have been due to poor description framing, not a hard policy wall.
 
-**Time wasted:** ~2 weeks across two submission cycles, multiple HTML page rewrites,
-OAuth scope reviews, app description rewrites.
+**Current status:** Zernio handles TikTok posting in the meantime. If the third TikTok
+developer app attempt is approved, we can switch to direct API posting and remove the
+Zernio dependency for TikTok.
+
+**The fix (interim):** Use Zernio as a scheduling service for TikTok. Zernio is already
+an approved TikTok developer. We use it for TikTok + Pinterest.
+
+**Time wasted:** ~2 weeks across two submission cycles + ongoing monitoring.
 
 **Rule for next time:** Before building any social API integration, check the platform's
 developer use case policy. If "posting to your own account" is listed as a disallowed use
-case, skip the direct API and go straight to a scheduling service.
+case, try reframing around Content Posting API first before giving up on direct integration.
 
 ---
 
