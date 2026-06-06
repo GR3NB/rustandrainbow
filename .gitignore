@@ -1,0 +1,49 @@
+# NEVER commit credentials or local environment
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tokens / secrets / signature files (defense in depth)
+*token*.txt
+*secret*
+*.pem
+*.key
+
+# Generated content (shouldn't be committed; regenerable)
+designs/
+generated/
+output/
+
+# Logs (runtime state, not source)
+*.log
+
+# Runtime data (append-only, not source)
+performance_log.json
+designs_log.json
+
+# TikTok app verification file
+tiktokez*.txt
+
+# Vizsla reference photos (large binary, tracked in Drive/iCloud)
+Vizsla photos/

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.rustandrainbow.generate</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/ryannortham/Claude/Projects/side business/Rust &amp; Rainbow/run_generate.sh</string>
+    </array>
+    <!-- Sunday at 02:00 AM -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>0</integer>
+            <key>Hour</key><integer>2</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+    </array>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>/Users/ryannortham/Claude/Projects/side business/Rust &amp; Rainbow/generate.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ryannortham/Claude/Projects/side business/Rust &amp; Rainbow/generate.log</string>
+</dict>
+</plist>
