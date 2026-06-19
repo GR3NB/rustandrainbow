@@ -51,7 +51,7 @@ If the list is empty, continue to Step 3.
 4. **Select an app type** → Pick **Business** (this is required for Instagram Graph API access)
 5. Click **Next**
 6. **App name:** `Rust and Rainbow` (this is what's shown to users during OAuth)
-7. **App contact email:** `ryan@northamfamily.org`
+7. **App contact email:** `rustandrainbow@gmail.com`
 8. **Business portfolio:** select **RustandRainbow** from the dropdown (this connects the dev app to your existing Business Manager — important)
 9. Click **Create app**
 10. Confirm with your Facebook password
