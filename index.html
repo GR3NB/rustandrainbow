@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rust &amp; Rainbow</title>
+  <link rel="icon" type="image/png" href="/rustandrainbow/favicon.png" />
+  <link rel="apple-touch-icon" href="/rustandrainbow/apple-touch-icon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -26,6 +28,15 @@
       font-weight: 700;
       text-decoration: none;
       letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    header .brand img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      display: block;
     }
     header nav a {
       color: #F5F0E8;
@@ -71,7 +82,10 @@
 <body>
 
 <header>
-  <a class="brand" href="/">Rust &amp; Rainbow</a>
+  <a class="brand" href="/rustandrainbow/">
+    <img src="/rustandrainbow/favicon.png" alt="Rust &amp; Rainbow logo" />
+    Rust &amp; Rainbow
+  </a>
   <nav>
     <a href="/rustandrainbow/privacy.html">Privacy Policy</a>
     <a href="/rustandrainbow/terms.html">Terms of Service</a>
