@@ -2,7 +2,7 @@
 
 **Effective date:** May 9, 2026
 **Business:** Rust & Rainbow
-**Contact:** ryan@northamfamily.org
+**Contact:** rustandrainbow@gmail.com
 
 This Privacy Policy explains how Rust & Rainbow ("we", "us", "our") handles information in connection with our Etsy shop, our social media presence on Instagram and TikTok, and our use of platform APIs (TikTok Content Posting API, Meta Instagram Graph API, Etsy API, Printify API, Ideogram API).
 
@@ -40,7 +40,7 @@ The following third party services may receive data in connection with our opera
 
 ## 8. Your rights
 
-If you placed an order with us via Etsy and want a copy of, or deletion of, the order data we hold (which is limited to order fulfillment information), contact ryan@northamfamily.org. We will respond within 30 days.
+If you placed an order with us via Etsy and want a copy of, or deletion of, the order data we hold (which is limited to order fulfillment information), contact rustandrainbow@gmail.com. We will respond within 30 days.
 
 ## 9. Data retention
 
@@ -56,4 +56,4 @@ We may update this policy. The effective date at the top reflects the most recen
 
 ## 12. Contact
 
-For privacy questions: ryan@northamfamily.org
+For privacy questions: rustandrainbow@gmail.com

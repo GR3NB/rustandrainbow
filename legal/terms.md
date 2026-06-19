@@ -2,7 +2,7 @@
 
 **Effective date:** May 9, 2026
 **Business:** Rust & Rainbow
-**Contact:** ryan@northamfamily.org
+**Contact:** rustandrainbow@gmail.com
 
 These Terms of Service govern your use of any content, services, or APIs operated by Rust & Rainbow.
 
@@ -48,4 +48,4 @@ These terms are governed by the laws of the State of Oregon, USA, without regard
 
 ## 11. Contact
 
-For questions about these terms: ryan@northamfamily.org
+For questions about these terms: rustandrainbow@gmail.com
