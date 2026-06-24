@@ -223,15 +223,17 @@ this automatically now.
 
 ---
 
-## 9. --mode generate cannot run unattended — review step requires a real TTY
+## 9. ~~--mode generate cannot run unattended~~ → FIXED 2026-06-23 (all modes are now headless-safe)
 
-**What happened:** Attempted to run `python3 agent.py --mode generate` from Claude Code's Bash tool (non-interactive context). Ideogram generated all 4 images successfully and saved them to output/. But `review_designs()` calls Python's `input()`, which requires a TTY. In a non-interactive shell, `input()` raises `EOFError` immediately.
+**The original bug (kept for context):** `review_designs()` called Python's `input()` unconditionally. In a non-interactive shell (launchd/NAS, no TTY) `input()` raises `EOFError` — Ideogram generated and saved all images (credits spent), then the run crashed before publishing or logging anything. The launchd wrapper still exited 0, so the watchdog never noticed; this had been happening on *every* scheduled generate run. `run_monitor()` had the same bug (a Y/N prompt to delete listings).
 
-**What works:** Run `--mode generate` directly from Terminal.app, not from any automated context. The images open in Preview; you type A/S/Q per image.
+**The fix (2026-06-23, in agent.py):**
+- `review_designs(designs, auto_confirm)` — when `--yes` OR no TTY (`sys.stdin.isatty()` false), auto-approves all instead of prompting; the macOS-only `os.system("open …")` preview is gated on `sys.platform == "darwin"` AND interactivity.
+- `run_monitor()` — when headless, REPORT ONLY; never auto-deletes listings (deletion is destructive — that branch stays human-only, even under `--yes`).
+- `run_towels()` — degrades gracefully when headless without `--title`.
+- `run_generate.sh` now does `rc=$?; exit $rc` so a crash is no longer masked as exit 0.
 
-**Workaround used (2026-05-21):** When images were already downloaded but review failed, wrote a one-off `_publish_pending.py` script with the design metadata hardcoded, published directly, then deleted the script. This avoids re-calling Ideogram (costs credits) and gets around the TTY issue.
-
-**Rule for next time:** `--mode generate` = interactive, run from Terminal. `--mode market` and `--mode monitor` = unattended-safe (use `--yes` for market). If you need to publish pre-generated images without a TTY, write a targeted one-off script that calls `upload_to_printify()` directly.
+**Rule for next time:** any code a scheduler (launchd/cron/NAS) can reach must be headless-safe — guard every `input()` on `sys.stdin.isatty()`/`--yes`, gate OS GUI calls on platform + interactivity, and `grep -n "input(" agent.py` to audit EVERY call site (the anti-pattern recurs). Destructive headless defaults = report-only, never auto-destroy.
 
 **Also learned:** Always verify Printify blueprint IDs against the live catalog API before hardcoding. Blueprint 367 (assumed Kiss-Cut Stickers) returned 404 — the real ID is 400. Use this to check: `GET /v1/catalog/blueprints.json` and filter by title.
 
@@ -262,6 +264,12 @@ post_to_tiktok(image_url, tiktok_caption)
 ---
 
 ## Current working stack (2026-05-21)
+
+> ⚠️ **Scheduling/hosting rows below are SUPERSEDED.** As of 2026-06-23 the cron→launchd
+> history no longer applies: market/monitor/report/suggest run on the **Synology NAS** via
+> `rr-supervisor.py`; only `generate`/`refresh_token`/`welra_assessment` remain on Mac launchd.
+> See the vault `Projects/Rust_and_Rainbow/State.md` "Scheduling Architecture" + the
+> `NAS_RR_Migration_Runbook` for the live setup. The design/posting *API* rows below are still accurate.
 
 | Layer | Tool | Notes |
 |---|---|---|
@@ -298,3 +306,21 @@ Log file: ~/Library/Logs/rust_rainbow_market.log  (NOT inside project dir — TC
 - META_ACCESS_TOKEN: refresh by 2026-07-01 (long-lived, ~60 day rolling) — **SET A CALENDAR REMINDER FOR JUNE 25**
 - Zernio API key: valid until ~2027-05-14 (1 year)
 - Zernio platform tokens: auto-refreshed by Zernio
+
+---
+
+## Cross-project deployment lessons (2026-06-07)
+
+These apply to any future infrastructure work on this project or Welra.
+
+**Railway Logs tab vs Deploy tab**
+The Deploy tab only shows build steps + healthcheck. Runtime stdout/stderr (the actual crash message) is in the Logs tab. Always check Logs when a healthcheck fails with no visible cause.
+
+**Node.js version must match SDK requirements**
+`@supabase/supabase-js` v2.39+ requires Node 22+ for native WebSocket. On Node 20 the client throws at module load — zero output, port never bound. Use `node:22-slim` as the default base image for all new projects.
+
+**Never instantiate SDK clients at module level with optional keys**
+`new Stripe('')`, `new SomeSDK(emptyKey)` at module level crash the process during `require()` — before any logger exists, before any error handler runs. Use lazy getter functions called inside handlers only.
+
+**Confirm Railway green before moving on**
+After every push, wait for the green deploy badge in Railway before starting the next task. Never push and assume.
